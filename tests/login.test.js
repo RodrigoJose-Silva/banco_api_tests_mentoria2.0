@@ -14,6 +14,7 @@ describe('Login', () => {
             expect(response.status).to.be.equal(200)
             expect(response.body.token).to.be.a('string')
         })
+
         it('Deve retornar 405 quando tentar fazer login com método diferente de POST', async () => {
             const response = await request(process.env.BASE_URL)
                 .put('/login')
@@ -23,6 +24,7 @@ describe('Login', () => {
             expect(response.status).to.equal(405)
             expect(response.body.error).to.equal('Método não permitido.')
         })
+
         it('Deve retornar 400 quando tentar fazer login sem username preenchido', async () => {
             const loginSemUsername = post_login
             loginSemUsername.username = ''
@@ -35,6 +37,7 @@ describe('Login', () => {
             expect(response.status).to.equal(400)
             expect(response.body.error).to.equal('Usuário e senha são obrigatórios.')
         })
+
         it('Deve retornar 400 quando tentar fazer login sem senha preenchida', async () => {
             const loginSemSenha = post_login
             loginSemSenha.senha = ''
@@ -47,6 +50,7 @@ describe('Login', () => {
             expect(response.status).to.equal(400)
             expect(response.body.error).to.equal('Usuário e senha são obrigatórios.')
         })
+
         it('Deve retornar 400 quando tentar fazer login com username preenchido null', async () => {
             const loginUsernamenull = post_login
             loginUsernamenull.username = ''
@@ -59,6 +63,7 @@ describe('Login', () => {
             expect(response.status).to.equal(400)
             expect(response.body.error).to.equal('Usuário e senha são obrigatórios.')
         })
+
         it('Deve retornar 400 quando tentar fazer login com senha preenchida null', async () => {
             const loginSenhaNull = post_login
             loginSenhaNull.senha = null
@@ -71,6 +76,7 @@ describe('Login', () => {
             expect(response.status).to.equal(400)
             expect(response.body.error).to.equal('Usuário e senha são obrigatórios.')
         })
+
         it('Deve retornar 401 quando tentar fazer login com username preecnhido invalido', async () => {
             const loginComUsernameInvalido = post_login
             loginComUsernameInvalido.username = 'test.test'
@@ -84,6 +90,7 @@ describe('Login', () => {
             expect(response.status).to.equal(401)
             expect(response.body.error).to.equal('Usuário ou senha inválidos.')
         })
+        
         it('Deve retornar 401 quando tentar fazer login com senha preenchida invalida', async () => {
             const loginComSenhaInvalida = post_login
             loginComSenhaInvalida.senha = 'abc123'
