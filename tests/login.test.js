@@ -15,8 +15,6 @@ describe('Login', () => {
             expect(response.body.token).to.be.a('string')
         })
         it('Deve retornar 405 quando tentar fazer login com método diferente de POST', async () => {
-            let bodyLogin
-
             const response = await request(process.env.BASE_URL)
                 .put('/login')
                 .set('Content-Type', 'application/json')
